@@ -1,0 +1,423 @@
+<div id="container">
+  <div class="tailwind css-myl2ny css-exq74d css-gs60ek">
+    <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="text-card-foreground flex flex-col gap-6 rounded-xl border p-8 bg-white shadow-xl"
+          *ngIf="questions">
+          <div class="flex items-center gap-3 mb-6">
+            <div class="p-3 bg-indigo-100 rounded-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-clipboard-list w-8 h-8 text-indigo-600" aria-hidden="true">
+                <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2">
+                </path>
+                <path d="M12 11h4"></path>
+                <path d="M12 16h4"></path>
+                <path d="M8 11h.01"></path>
+                <path d="M8 16h.01"></path>
+              </svg>
+            </div>
+            <div>
+              <h1 class="text-gray-900">Welcome to the Home Design Survey</h1>
+              <p class="text-gray-600">
+                Please tell us a bit about yourself before we begin
+              </p>
+            </div>
+          </div>
+          <form class="space-y-6" [formGroup]="preSurveyFrom">
+            <div class="space-y-3" *ngFor="let q of questions">
+              <label
+                class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                for="age">{{q.question}}</label>
+
+              <!-- Radio -->
+              <div *ngIf="q.questionType === 'single'">
+                <label *ngFor="let opt of q.options" class="flex items-center mb-2 cursor-pointer">
+                  <input type="radio" [value]="opt.code" [formControlName]="q.qs_id" class="mr-2">
+                  {{ opt.option }}
+                </label>
+              </div>
+
+              <!-- Free text -->
+              <div *ngIf="q.questionType === 'freetext'">
+                <textarea  [formControlName]="q.qs_id" class="border rounded w-full px-2 py-1"></textarea>
+              </div>
+
+              <!-- <div role="radiogroup" aria-required="false" dir="ltr" class="grid gap-3" tabindex="0"
+                style="outline: none">
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="18-24"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="age-18-24" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="18-24" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="age-18-24">18-24</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="25-34"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="age-25-34" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="25-34" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="age-25-34">25-34</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="35-44"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="age-35-44" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="35-44" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="age-35-44">35-44</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="45-54"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="age-45-54" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="45-54" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="age-45-54">45-54</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="55+"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="age-55" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1" value="55+"
+                    style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="age-55">55+</label>
+                </div>
+              </div> -->
+            </div>
+            <!-- <div class="space-y-3">
+              <label
+                class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                for="gender">Gender</label>
+              <div role="radiogroup" aria-required="false" dir="ltr" class="grid gap-3" tabindex="0"
+                style="outline: none">
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="male"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="gender-male" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="male" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="gender-male">Male</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="female"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="gender-female" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="female" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="gender-female">Female</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="non-binary"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="gender-non-binary" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="non-binary" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="gender-non-binary">Non-binary</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked"
+                    value="prefer-not-to-say"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="gender-prefer-not" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="prefer-not-to-say" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="gender-prefer-not">Prefer not to say</label>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <label
+                class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                for="homeOwnership">Home Ownership Status</label>
+              <div role="radiogroup" aria-required="false" dir="ltr" class="grid gap-3" tabindex="0"
+                style="outline: none">
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="own"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="own" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1" value="own"
+                    style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="own">Own</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="rent"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="rent" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1" value="rent"
+                    style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="rent">Rent</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="planning-to-buy"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="planning" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="planning-to-buy" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="planning">Planning to buy</label>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <label
+                class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                for="designExperience">Interior Design Experience</label>
+              <div role="radiogroup" aria-required="false" dir="ltr" class="grid gap-3" tabindex="0"
+                style="outline: none">
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="professional"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="professional" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="professional" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="professional">Professional designer</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="enthusiast"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="enthusiast" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="enthusiast" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="enthusiast">Design enthusiast</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="some-knowledge"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="some-knowledge" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="some-knowledge" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="some-knowledge">Some knowledge</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="beginner"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="beginner" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="beginner" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="beginner">Beginner</label>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <label
+                class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                for="renovationPlans">Do you have any home renovation plans in the next 12
+                months?</label>
+              <div role="radiogroup" aria-required="false" dir="ltr" class="grid gap-3" tabindex="0"
+                style="outline: none">
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="yes-planning"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="yes-planning" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="yes-planning" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="yes-planning">Yes, actively planning</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="yes-considering"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="yes-considering" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1"
+                    value="yes-considering" style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="yes-considering">Yes, considering</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="maybe"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="maybe" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1" value="maybe"
+                    style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="maybe">Maybe</label>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <button type="button" role="radio" aria-checked="false" data-state="unchecked" value="no"
+                    class="border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
+                    id="no-plans" tabindex="-1"></button><input type="radio" aria-hidden="true" tabindex="-1" value="no"
+                    style="
+                      transform: translateX(-100%);
+                      position: absolute;
+                      pointer-events: none;
+                      opacity: 0;
+                      margin: 0px;
+                      width: 16px;
+                      height: 16px;
+                    " /><label
+                    class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 cursor-pointer"
+                    for="no-plans">No</label>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <label
+                class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+                for="primaryInterest">What aspect of home design interests you most?</label><textarea
+                class="resize-none border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content w-full rounded-md border bg-input-background px-3 py-2 text-base transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-[100px]"
+                id="primaryInterest"
+                placeholder="E.g., modern aesthetics, functionality, sustainability, comfort..."></textarea>
+            </div> -->
+            <button (click)="submitSurvey()" 
+              class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive h-9 px-4 py-2 has-[&gt;svg]:px-3 w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+              type="submit">
+              Continue to Survey
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

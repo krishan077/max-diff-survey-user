@@ -1,0 +1,12 @@
+
+      <div class="p-4 bg-white rounded-xl shadow">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-gray-600">
+            {{ currentStage === 'maxdiff' ? 'Question ' + (currentSetIndex + 1) + ' of ' + sets.length : 'Follow-up Questions' }}
+          </span>
+          <span class="text-gray-600">{{ progress | number: '1.0-0' }}% Complete</span>
+        </div>
+        <div class="h-2 bg-gray-200 rounded">
+          <div class="h-2 bg-[#030213] rounded" [style.width.%]="progress"></div>
+        </div>
+      </div>
