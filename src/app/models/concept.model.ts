@@ -1,5 +1,6 @@
 export interface Concept {
   id: string;
-  name: string;
-  imageUrl: string;
+  label: string;
+  url: string;
+  md_id:number
 }

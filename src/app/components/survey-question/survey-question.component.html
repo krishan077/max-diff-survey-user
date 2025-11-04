@@ -8,11 +8,11 @@
          }">
 
             <div class="w-32 h-32 flex-shrink-0">
-                <img [src]="concept.imageUrl" [alt]="concept.name" class="w-full h-full object-cover" />
+                <img [src]="concept.url" [alt]="concept.label" class="w-full h-full object-cover" />
             </div>
 
             <div class="flex-1 p-4">
-                <p class="text-gray-900">{{ concept.name }}</p>
+                <p class="text-gray-900">{{ concept.label }}</p>
             </div>
 
             <div class="flex gap-2 p-4">
@@ -43,39 +43,26 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="flex justify-center">
-        <button (click)="handleSubmit()" [disabled]="!isSubmitEnabled"
-            class="px-6 py-3 rounded-lg text-white text-lg font-medium transition-colors"
-            [ngClass]="isSubmitEnabled ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-gray-300 cursor-not-allowed'">
-            Continue to Follow-up Questions
-        </button>
-    </div> -->
-
-
     <div class="mt-8 flex justify-end">
         <button (click)="handleSubmit()" [disabled]="!isSubmitEnabled" data-slot="button"
            class="inline-flex bg-[#030213] text-white items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive  hover:bg-primary/90 h-10 rounded-md has-[&gt;svg]:px-4 px-8">Continue
         </button>
     </div>
-
-
-
     @if(isSubmitEnabled){
     <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <div class="flex items-center justify-center gap-6">
             <div class="flex items-center gap-2">
                 <span class="text-green-600">Most:</span>
-                <img [src]="bestDisclamer.imageUrl" [alt]="bestDisclamer.name" class="w-12 h-12 object-cover rounded">
-                <span class="text-blue-900">{{bestDisclamer.name}}
+                <img [src]="bestDisclamer.url" [alt]="bestDisclamer.label" class="w-12 h-12 object-cover rounded">
+                <span class="text-blue-900">{{bestDisclamer.label}}
                 </span>
             </div>
             <span class="text-gray-400">•</span>
             <div class="flex items-center gap-2">
                 <span class="text-red-600">Least:
                 </span>
-                <img [src]="worstDisclamer.imageUrl" [alt]="worstDisclamer.name" class="w-12 h-12 object-cover rounded">
-                <span class="text-blue-900">{{worstDisclamer.name}}
+                <img [src]="worstDisclamer.url" [alt]="worstDisclamer.label" class="w-12 h-12 object-cover rounded">
+                <span class="text-blue-900">{{worstDisclamer.label}}
                 </span>
             </div>
         </div>

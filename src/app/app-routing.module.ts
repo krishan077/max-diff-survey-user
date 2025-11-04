@@ -5,6 +5,7 @@ import { PostSurveyComponent } from './components/post-survey/post-survey.compon
 import { InstructionComponent } from './components/instruction/instruction.component';
 import { SurveyInstructionComponent } from './components/survey-instruction/survey-instruction.component';
 import { MaxDiffSurveyComponent } from './components/max-diff-survey/max-diff-survey.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
     path: 'post-survey',
     component: PostSurveyComponent
   },
+  {
+    path: 'max-diff',
+    component: MaxDiffSurveyComponent
+  },
+  {
+    path:'thankyou',
+    component:ThankyouComponent
+  }
 ];
 
 @NgModule({

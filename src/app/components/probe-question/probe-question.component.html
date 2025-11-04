@@ -5,80 +5,94 @@
         </h3>
     </div>
 
-    <!-- Best Choice -->
-    <div class="border-2 border-green-200 rounded-lg p-4 bg-green-50">
+     <ng-container *ngFor="let question of probeQuestions[0].survey">
+      
+        <div formGroupName="freetext">
+                        <!-- Best Choice -->
+    <div class="border-2 border-green-200 rounded-lg p-4 bg-green-50" *ngIf="question.questionType == 'freetext' && question.qs_flags.type == 'most'">
         <div class="flex items-start gap-4 mb-3">
-            <img [src]="bestConcept.imageUrl" [alt]="bestConcept.name" class="w-24 h-24 object-cover rounded" />
+            <img [src]="bestConcept.url" [alt]="bestConcept.label" class="w-24 h-24 object-cover rounded" />
             <div class="flex-1">
                 <h4 class="font-medium text-gray-900 mb-1">
-                    Most Preferred: {{ bestConcept.name }}
+                    Most Preferred: {{ bestConcept.label }}
                 </h4>
-                <p class="text-sm text-gray-600">
-                    Why did you choose this as your most preferred option?
+                <p class="text-sm text-gray-600" [innerHTML]="question.question">
+                   
                 </p>
             </div>
         </div>
 
-        <textarea formControlName="bestReason" placeholder="Please explain why you prefer this option..." rows="3"
+        <textarea [formControlName]="question.qs_id" placeholder="Please explain why you prefer this option..." rows="3"
             class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent resize-none">
     </textarea>
     </div>
 
     <!-- Worst Choice -->
-    <div class="border-2 border-red-200 rounded-lg p-4 bg-red-50">
+    <div class="border-2 border-red-200 rounded-lg p-4 bg-red-50"  *ngIf="question.questionType == 'freetext' && question.qs_flags.type == 'least'">
         <div class="flex items-start gap-4 mb-3">
-            <img [src]="worstConcept.imageUrl" [alt]="worstConcept.name" class="w-24 h-24 object-cover rounded" />
+            <img [src]="worstConcept.url" [alt]="worstConcept.label" class="w-24 h-24 object-cover rounded" />
             <div class="flex-1">
                 <h4 class="font-medium text-gray-900 mb-1">
-                    Least Preferred: {{ worstConcept.name }}
+                    Least Preferred: {{ worstConcept.label }}
                 </h4>
-                <p class="text-sm text-gray-600">
-                    Why did you choose this as your least preferred option?
+                <p class="text-sm text-gray-600" [innerHTML]="question.question">
                 </p>
             </div>
         </div>
 
-        <textarea formControlName="worstReason" placeholder="Please explain why you don't prefer this option..." rows="3"
+        <textarea [formControlName]="question.qs_id" placeholder="Please explain why you don't prefer this option..." rows="3"
             class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent resize-none">
     </textarea>
     </div>
 
-
-    <div class="space-y-3">
-        <label class="text-sm font-medium text-gray-900">
-            How confident are you about these choices? *
-        </label>
-
-        <div role="radiogroup" class="grid gap-3">
-            <div *ngFor="let option of confidenceOptions"
-                class="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50 cursor-pointer" (click)="probeForm.get('confidence')?.setValue(option.value)">
-                <button type="button" role="radio" [attr.aria-checked]="probeForm.get('confidence')?.value === option.value"
-                    [attr.data-state]="probeForm.get('confidence')?.value === option.value ? 'checked' : 'unchecked'" [ngClass]="[
-          'w-2.5 h-2.5 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-all outline-none',
-          probeForm.get('confidence')?.value === option.value
-            ? 'bg-[#030213] border-[#030213]'
-            : 'border-gray-400 bg-white'
-        ]"></button>
-
-                <label class="flex-1 text-sm text-gray-800 cursor-pointer">
-                    {{ option.label }}
-                </label>
-            </div>
-        </div>
-    </div>
-
-    <div class="space-y-2">
+        <div class="space-y-2"  *ngIf="question.questionType == 'freetext' && question.SPSS == 'M10'">
         <label data-slot="label"
             class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50 text-gray-900"
-            for="additional-comments">Any additional thoughts or comments? (Optional)
+            for="additional-comments">{{question.question}}
         </label>
-        <textarea formControlName="comments"
+        <textarea [formControlName]="question.qs_id" rows="4"
             data-slot="textarea"
             class="resize-none border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content w-full rounded-md border bg-input-background px-3 py-2 text-base transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm min-h-20"
             id="additional-comments"
             placeholder="Feel free to share any other thoughts about these options...">
         </textarea>
+       </div>
+        </div>
+
+
+<div class="space-y-3" *ngIf="question.questionType == 'single'" formGroupName="single">
+  <label class="text-sm font-medium text-gray-900">
+    {{ question.question }}
+  </label>
+
+  <div role="radiogroup" class="grid gap-3">
+    <div *ngFor="let opt of question.options"
+      class="flex items-center space-x-2 p-3 rounded-lg hover:bg-gray-50 cursor-pointer"
+      (click)="probeForm.get('single.' + question.qs_id)?.setValue(opt.opt_id)">
+
+      <button type="button" role="radio"
+        [attr.aria-checked]="probeForm.get('single.' + question.qs_id)?.value === opt.opt_id"
+        [attr.data-state]="probeForm.get('single.' + question.qs_id)?.value === opt.opt_id ? 'checked' : 'unchecked'"
+        [ngClass]="[
+          'w-2.5 h-2.5 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-all outline-none',
+          probeForm.get('single.' + question.qs_id)?.value === opt.opt_id
+            ? 'bg-[#030213] border-[#030213]'
+            : 'border-gray-400 bg-white'
+        ]">
+      </button>
+
+      <label class="flex-1 text-sm text-gray-800 cursor-pointer">
+        {{ opt.option }}
+      </label>
     </div>
+  </div>
+</div>
+
+
+
+
+     </ng-container>
+
         <div class="mt-8 flex justify-end">
         <button (click)="handleSubmit()" [disabled]="!probeForm.valid" data-slot="button"
            class="inline-flex bg-[#030213] text-white items-center justify-center gap-2 whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive  hover:bg-primary/90 h-10 rounded-md has-[&gt;svg]:px-4 px-8">Continue

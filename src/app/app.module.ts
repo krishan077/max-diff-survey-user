@@ -12,6 +12,8 @@ import { MaxDiffSurveyComponent } from './components/max-diff-survey/max-diff-su
 import { InstructionComponent } from './components/instruction/instruction.component';
 import { SurveyInstructionComponent } from './components/survey-instruction/survey-instruction.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SnackComponent } from './components/snack.component';
+import { ThankyouComponent } from './components/thankyou/thankyou.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     MaxDiffSurveyComponent,
     InstructionComponent,
     SurveyInstructionComponent,
+    SnackComponent,
+    ThankyouComponent
   ],
   imports: [
     BrowserModule,
