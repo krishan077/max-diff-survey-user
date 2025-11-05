@@ -1,7 +1,7 @@
 <div class="p-6 bg-white rounded-xl shadow">
     <div class="grid grid-cols-1 gap-4 mb-6">
         <div *ngFor="let concept of concepts;let i = index"
-            class="flex items-center gap-4 relative border-2 rounded-lg overflow-hidden transition-all" [ngClass]="{
+            class="flex items-center gap-2 sm:gap-4 relative border-2 rounded-lg overflow-hidden transition-all" [ngClass]="{
            'border-green-500 shadow-lg bg-green-50': bestChoice === concept.id,
            'border-red-500 shadow-lg  bg-red-50': worstChoice === concept.id,
            'border-gray-200 hover:border-gray-300': bestChoice !== concept.id && worstChoice !== concept.id,
@@ -11,26 +11,27 @@
                 <img [src]="concept.url" [alt]="concept.label" class="w-full h-full object-cover" />
             </div>
 
-            <div class="flex-1 p-4">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-2 flex-1">
+            <div class="flex-1 p-4 w-fit">
                 <p class="text-gray-900">{{ concept.label }}</p>
             </div>
 
-            <div class="flex gap-2 p-4">
+            <div class="flex gap-1 p-0 sm:gap-2 sm:p-4">
                 <!-- Best -->
                 <button (click)="handleConceptClick(concept.id, 'best' ,i)"
-                    class="flex items-center gap-2 border-2 rounded-lg px-4 py-2 leading-none transition-all" [ngClass]="bestChoice === concept.id
+                    class="flex items-center gap-1 sm:gap-2 border-2 rounded-lg px-2 py-2 leading-none transition-all" [ngClass]="bestChoice === concept.id
       ? 'bg-green-600 text-white border-green-600'
       : 'border-green-500 text-green-600 hover:bg-green-50 bg-white'">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 shrink-0" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 6 9 17l-5-5"></path>
                     </svg>
-                    <span class="hidden sm:inline font-medium">Most</span>
+                    <span class="sm:inline font-medium">Most</span>
                 </button>
 
                 <!-- Worst -->
                 <button (click)="handleConceptClick(concept.id, 'worst' ,i)"
-                    class="flex items-center gap-2 border-2 rounded-lg px-4 py-2 leading-none transition-all" [ngClass]="worstChoice === concept.id
+                    class="flex items-center gap-1 sm:gap-2 border-2 rounded-lg px-1 py-2  leading-none transition-all" [ngClass]="worstChoice === concept.id
       ? 'bg-red-600 text-white border-red-600'
       : 'border-red-500 text-red-600 hover:bg-red-50 bg-white'">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 shrink-0" fill="none"
@@ -38,8 +39,9 @@
                         <path d="M18 6 6 18"></path>
                         <path d="m6 6 12 12"></path>
                     </svg>
-                    <span class="hidden sm:inline font-medium">Least</span>
+                    <span class="sm:inline font-medium">Least</span>
                 </button>
+            </div>
             </div>
         </div>
     </div>
@@ -51,14 +53,14 @@
     @if(isSubmitEnabled){
     <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
         <div class="flex items-center justify-center gap-6">
-            <div class="flex items-center gap-2">
+            <div class="flex flex-col sm:flex-row items-center gap-2">
                 <span class="text-green-600">Most:</span>
                 <img [src]="bestDisclamer.url" [alt]="bestDisclamer.label" class="w-12 h-12 object-cover rounded">
                 <span class="text-blue-900">{{bestDisclamer.label}}
                 </span>
             </div>
             <span class="text-gray-400">•</span>
-            <div class="flex items-center gap-2">
+            <div class="flex flex-col sm:flex-row items-center gap-2">
                 <span class="text-red-600">Least:
                 </span>
                 <img [src]="worstDisclamer.url" [alt]="worstDisclamer.label" class="w-12 h-12 object-cover rounded">
